@@ -506,12 +506,12 @@ promptList' :: [(String, XPConfig -> String -> X (), String)]
 promptList' = [ ("c", calcPrompt, "qalc")         -- requires qalculate-gtk
               ]
 
-calcPrompt c ans =
-    inputPrompt c (trim ans) ?+ \input ->
-        liftIO(runProcessWithInput "qalc" [input] "") >>= calcPrompt c
-    where
-        trim  = f . f
-            where f = reverse . dropWhile isSpace
+-- calcPrompt c ans =
+--     inputPrompt c (trim ans) ?+ \input ->
+--         liftIO(runProcessWithInput "qalc" [input] "") >>= calcPrompt c
+--     where
+--         trim  = f . f
+--             where f = reverse . dropWhile isSpace
 
 dtXPKeymap :: M.Map (KeyMask,KeySym) (XP ())
 dtXPKeymap = M.fromList $
@@ -726,7 +726,7 @@ myKeys =
     -- Xmonad
         [ ("M-C-r", spawn "xmonad --recompile") -- Recompiles xmonad
         , ("M-S-r", spawn "xmonad --restart")   -- Restarts xmonad
-        , ("M-S-<Delete>", io exitSuccess)             -- Quits xmonad
+        , ("M-S-<Delete>", io exitSuccess)      -- Quits xmonad
 
     -- Run Prompt
         , ("M-p", shellPrompt dtXPConfig) -- Shell Prompt
@@ -855,8 +855,8 @@ myKeys =
         ++ [("M-S-s " ++ k, S.selectSearch f) | (k,f) <- searchList ]
     -- Appending some extra xprompts to keybindings list.
     -- Look at "xprompt settings" section this of config for values for "k".
-        -- ++ [("M-p " ++ k, f dtXPConfig') | (k,f) <- promptList ]
-        -- ++ [("M-p " ++ k, f dtXPConfig' g) | (k,f,g) <- promptList' ]
+        ++ [("M-S-p " ++ k, f dtXPConfig') | (k,f) <- promptList ]
+        ++ [("M-S-p " ++ k, f dtXPConfig' g) | (k,f,g) <- promptList' ]
     -- The following lines are needed for named scratchpads.
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
                 nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
