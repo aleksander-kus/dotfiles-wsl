@@ -84,13 +84,16 @@ myModMask = mod4Mask       -- Sets modkey to super/windows key
 myTerminal :: String
 myTerminal = "alacritty"   -- Sets default terminal
 
+myFileManager :: String
+myFileManager = "pcmanfm"   -- Sets default terminal
+
 myBrowser :: String
 myBrowser = "chromium "               -- Sets qutebrowser as browser for tree select
 -- myBrowser = myTerminal ++ " -e lynx " -- Sets lynx as browser for tree select
 
 myEditor :: String
 -- myEditor = "emacsclient -c -a emacs "  -- Sets emacs as editor for tree select
-myEditor = "nano" 
+myEditor = "code" 
 -- myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor for tree select
 
 myBorderWidth :: Dimension
@@ -690,7 +693,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
                                  ||| threeCol
                                  -- ||| threeRow
 
-myWorkspaces = [ " dev ", " www ", " sys ", " steam ", " game ", " vbox ", " var " ]
+myWorkspaces = [ " dev ", " www ", " sys ", " steam ", " game ", " vbox ", "mus", " var " ]
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 
 xmobarEscape :: String -> String
@@ -716,7 +719,7 @@ myManageHook = composeAll
 
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
-    where fadeAmount = 1.0
+    where fadeAmount = 1
 
 myKeys :: [(String, X ())]
 myKeys =
@@ -732,6 +735,10 @@ myKeys =
         , ("M-<Return>", spawn (myTerminal ++ " -e fish"))
         , ("M-b", spawn (myBrowser))
         , ("M-M1-h", spawn (myTerminal ++ " -e htop"))
+        , ("M-e", spawn (myEditor))
+        , ("M-f", spawn (myFileManager))
+        , ("M-M1-h", spawn (myTerminal ++ " -e htop"))
+
 
     -- Kill windows
         , ("M-q", kill1)                         -- Kill the currently focused client
