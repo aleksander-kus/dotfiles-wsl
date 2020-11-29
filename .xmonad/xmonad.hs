@@ -502,9 +502,9 @@ promptList = [ ("m", manPrompt)          -- manpages prompt
              ]
 
 -- Same as the above list except this is for my custom prompts.
-promptList' :: [(String, XPConfig -> String -> X (), String)]
-promptList' = [ ("c", calcPrompt, "qalc")         -- requires qalculate-gtk
-              ]
+-- promptList' :: [(String, XPConfig -> String -> X (), String)]
+-- promptList' = [ ("c", calcPrompt, "qalc")         -- requires qalculate-gtk
+--               ]
 
 -- calcPrompt c ans =
 --     inputPrompt c (trim ans) ?+ \input ->
@@ -856,7 +856,7 @@ myKeys =
     -- Appending some extra xprompts to keybindings list.
     -- Look at "xprompt settings" section this of config for values for "k".
         ++ [("M-S-p " ++ k, f dtXPConfig') | (k,f) <- promptList ]
-        ++ [("M-S-p " ++ k, f dtXPConfig' g) | (k,f,g) <- promptList' ]
+    --  ++ [("M-S-p " ++ k, f dtXPConfig' g) | (k,f,g) <- promptList' ]
     -- The following lines are needed for named scratchpads.
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
                 nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
