@@ -30,8 +30,7 @@ bind -m vi-insert 'Control-l: clear-screen'
 [[ $- != *i* ]] && return
 
 ### PROMPT
-PS1='\e[0;34m\e[0m\e[0;32m\u\e[0;36m@\e[0;36m\h \w\e[0;32m$(__git_ps1)\n\e[0;32m└─\e[0m\e[0;32m \$\e[0m\e[0;32m ▶\e[0m '
-#PS1='\e[36;1m\u\e[34m@\h \e[31;1m\w\e[33m$(__git_ps1)\n└─ \$ \e[0m'
+PS1="[\u@\h \w]$ "
 ### PATH
 if [ -d "$HOME/.bin" ] ;
   then PATH="$HOME/.bin:$PATH"
@@ -103,7 +102,6 @@ alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
 # vim and emacs
-alias vim="nvim"
 alias em="/usr/bin/emacs -nw"
 alias emacs="emacsclient -c -a 'emacs'"
 alias doomsync="~/.emacs.d/bin/doom sync"
