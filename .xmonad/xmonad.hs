@@ -6,7 +6,7 @@ import qualified XMonad.StackSet as W
 
     -- Actions
 import XMonad.Actions.CopyWindow (kill1, killAllOtherCopies)
-import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
+import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Promote
@@ -76,7 +76,7 @@ import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
 myFont :: String
-myFont = "xft:Mononoki Nerd Font:bold:size=9:antialias=true:hinting=true"
+myFont = "xft:MesloLGS NF:bold:size=9:antialias=true:hinting=true"
 
 myModMask :: KeyMask
 myModMask = mod4Mask       -- Sets modkey to super/windows key
@@ -615,19 +615,19 @@ mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 tall     = renamed [Replace "tall"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
-           $ subLayout [] (smartBorders Simplest)
+           $ subLayout [] (Simplest)
            $ limitWindows 12
            $ mySpacing 8
            $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "monocle"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
-           $ subLayout [] (smartBorders Simplest)
+           $ subLayout [] (Simplest)
            $ limitWindows 20 Full
 grid     = renamed [Replace "grid"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
-           $ subLayout [] (smartBorders Simplest)
+           $ subLayout [] (Simplest)
            $ limitWindows 12
            $ mySpacing 8
            $ mkToggle (single MIRROR)
@@ -641,7 +641,7 @@ grid     = renamed [Replace "grid"]
 threeCol = renamed [Replace "threeCol"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
-           $ subLayout [] (smartBorders Simplest)
+           $ subLayout [] (Simplest)
            $ limitWindows 7
            $ mySpacing' 4
            $ ThreeCol 1 (3/100) (1/2)
@@ -693,7 +693,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
                                  ||| threeCol
                                  -- ||| threeRow
 
-myWorkspaces = [ " dev ", " www ", " sys ", " steam ", " game ", " vbox ", "mus", " var " ]
+myWorkspaces = [ " dev ", " www ", " twitch ", " sys ", " steam ", " game ", " mus ", " meet "]
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 
 xmobarEscape :: String -> String
@@ -708,13 +708,17 @@ myManageHook = composeAll
      -- I'm doing it this way because otherwise I would have to write out the full
      -- name of my workspaces, and the names would very long if using clickable workspaces.
      [ title =? "New Tab - Chromium"     --> doShift ( myWorkspaces !! 1 )
-     , className =? "mpv"     --> doShift ( myWorkspaces !! 7 )
-     , className =? "vlc"     --> doShift ( myWorkspaces !! 7 )
-     , className =? "Gimp"    --> doShift ( myWorkspaces !! 8 )
+     , title =? "Twitch - Chromium"     --> doShift ( myWorkspaces !! 2 )
+     , className =? "Microsoft Teams - Preview"     --> doShift ( myWorkspaces !! 7 )
+     , title =? "Microsoft Teams Notification" --> doFloat
+     , className =? "zoom"     --> doShift ( myWorkspaces !! 7 )
+     , className =? "Steam"     --> doShift ( myWorkspaces !! 4 )
+     , className =? "steam_app_945360"     --> doFloat
+     , className =? "steam_app_945360"     --> doShift ( myWorkspaces !! 5 )
      , className =? "Gimp"    --> doFloat
      , title =? "Oracle VM VirtualBox Manager"     --> doFloat
      , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 5 )
-     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+     , (className =? "Chromium" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
 myLogHook :: X ()
@@ -734,6 +738,7 @@ myKeys =
     -- Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn (myTerminal ++ " -e fish"))
         , ("M-b", spawn (myBrowser))
+        , ("M-S-t", spawn (myBrowser ++ " --new-window twitch.tv"))
         , ("M-M1-h", spawn (myTerminal ++ " -e htop"))
         , ("M-e", spawn (myEditor))
         , ("M-f", spawn (myFileManager))
@@ -745,15 +750,15 @@ myKeys =
         , ("M-S-q", killAll)                       -- Kill all windows on current workspace
 
     -- Workspaces
-        , ("M-.", nextScreen)  -- Switch focus to next monitor
-        , ("M-,", prevScreen)  -- Switch focus to prev monitor
+    --    , ("M-.", nextScreen)  -- Switch focus to next monitor
+    --    , ("M-,", prevScreen)  -- Switch focus to prev monitor
         , ("M-S-<KP_Add>", shiftTo Next nonNSP >> moveTo Next nonNSP)       -- Shifts focused window to next ws
         , ("M-S-<KP_Subtract>", shiftTo Prev nonNSP >> moveTo Prev nonNSP)  -- Shifts focused window to prev ws
-
+        , ("M--", toggleWS)
     -- Floating windows
-        , ("M-f", sendMessage (T.Toggle "floats")) -- Toggles my 'floats' layout
+        --, ("M-f", sendMessage (T.Toggle "floats")) -- Toggles my 'floats' layout
         , ("M-t", withFocused $ windows . W.sink)  -- Push floating window back to tile
-        , ("M-S-t", sinkAll)                       -- Push ALL floating windows to tile
+        --, ("M-S-t", sinkAll)                       -- Push ALL floating windows to tile
 
     -- Increase/decrease spacing (gaps)
         , ("M-d", decWindowSpacing 4)           -- Decrease window spacing
@@ -889,7 +894,7 @@ main = do
                         { ppOutput = \x -> hPutStrLn xmproc0 x  -- >> hPutStrLn xmproc1 x  >> hPutStrLn xmproc2 x
                         , ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]" -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#98be65" ""                -- Visible but not current workspace
-                        , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
+                        , ppHidden = xmobarColor "#82AAFF" "" . wrap "" "*"   -- Hidden workspaces in xmobar
                         , ppHiddenNoWindows = xmobarColor "#c792ea" ""        -- Hidden workspaces (no windows)
                         , ppTitle = xmobarColor "#b3afc2" "" . shorten 60     -- Title of active window in xmobar
                         , ppSep =  "<fc=#666666> <fn=2>|</fn> </fc>"          -- Separators in xmobar
