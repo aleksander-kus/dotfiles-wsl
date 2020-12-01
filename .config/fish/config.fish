@@ -1,8 +1,10 @@
 set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 set fish_greeting                      # Supresses fish's intro message
 set TERM "xterm-256color"              # Sets the terminal type
-set EDITOR "emacsclient -t -a ''"      # $EDITOR use Emacs in terminal
-set VISUAL "emacsclient -c -a emacs"   # $VISUAL use Emacs in GUI mode
+#set EDITOR "emacsclient -t -a ''"      # $EDITOR use Emacs in terminal
+#set VISUAL "emacsclient -c -a emacs"   # $VISUAL use Emacs in GUI mode
+set EDITOR "code"
+set VISUAL "code"
 set -U fish_color_command dfdfdf       # Set the default command color to white
 
 ### PROMPT ###
@@ -314,6 +316,13 @@ function conf-commit --argument message
 end
 ### END OF FUNCTIONS ###
 
+### SSH AGENT ###
+if test -z (pgrep ssh-agent)
+  eval (ssh-agent -c)
+  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+  set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+end
 
 ### ALIASES ###
 # spark aliases
@@ -330,7 +339,6 @@ alias .4 'cd ../../../..'
 alias .5 'cd ../../../../..'
 
 # vim and emacs
-alias vim 'nvim'
 alias em '/usr/bin/emacs -nw'
 alias emacs "emacsclient -c -a 'emacs'"
 alias doomsync "~/.emacs.d/bin/doom sync"
@@ -346,8 +354,8 @@ alias lt 'exa -aT --color=always --group-directories-first' # tree listing
 
 # pacman and yay
 alias pacsyu 'sudo pacman -Syyu'                 # update only standard pkgs
-alias yaysua 'yay -Sua --noconfirm'              # update only AUR pkgs
-alias yaysyu 'yay -Syu --noconfirm'              # update standard pkgs and AUR pkgs
+alias update_aur 'yay -Sua --noconfirm'              # update only AUR pkgs
+alias update 'yay -Syyu --noconfirm'              # update standard pkgs and AUR pkgs
 alias unlock 'sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
 alias cleanup 'sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
 
@@ -372,7 +380,7 @@ abbr -a mc mkdir-cd
 abbr -a unzip clean-unzip
 
 # recompile and restart xmonad in terminal
-alias restart "xmonad --recompile; xmonad --restart"
+alias restart "xmonad --recompile && xmonad --restart"
 
 # adding flags
 alias df 'df -h'                          # human-readable sizes
@@ -381,12 +389,12 @@ alias lynx 'lynx -cfg=~/.lynx/lynx.cfg -lss=~/.lynx/lynx.lss -vikeys'
 alias vifm './.config/vifm/scripts/vifmrun'
 
 ## get top process eating memory
-alias psmem 'ps auxf | sort -nr -k 4'
-alias psmem10 'ps auxf | sort -nr -k 4 | head -10'
+alias psmem 'ps aux | sort -nr -k 4'
+alias psmem10 'ps aux | sort -nr -k 4 | head -10'
 
 ## get top process eating cpu ##
-alias pscpu 'ps auxf | sort -nr -k 3'
-alias pscpu10 'ps auxf | sort -nr -k 3 | head -10'
+alias pscpu 'ps aux | sort -nr -k 3'
+alias pscpu10 'ps aux | sort -nr -k 3 | head -10'
 
 # Merge Xresources
 alias merge 'xrdb -merge ~/.Xresources'
