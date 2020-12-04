@@ -88,7 +88,7 @@ myFileManager :: String
 myFileManager = "pcmanfm"   -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "chromium "               -- Sets qutebrowser as browser for tree select
+myBrowser = "firefox "               -- Sets qutebrowser as browser for tree select
 -- myBrowser = myTerminal ++ " -e lynx " -- Sets lynx as browser for tree select
 
 myEditor :: String
@@ -555,6 +555,8 @@ dtXPKeymap = M.fromList $
 archwiki, ebay, news, reddit, urban :: S.SearchEngine
 
 archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
+aur = S.searchEngine "aur" "https://aur.archlinux.org/packages/?O=0&SeB=nd&SB=p&SO=d&K="
+packages = S.searchEngine "packages" "https://www.archlinux.org/packages/?sort=&q="
 ebay     = S.searchEngine "ebay" "https://www.ebay.com/sch/i.html?_nkw="
 news     = S.searchEngine "news" "https://news.google.com/search?q="
 reddit   = S.searchEngine "reddit" "https://www.reddit.com/search/?q="
@@ -565,16 +567,15 @@ urban    = S.searchEngine "urban" "https://www.urbandictionary.com/define.php?te
 searchList :: [(String, S.SearchEngine)]
 searchList = [ ("a", archwiki)
              , ("d", S.duckduckgo)
-             , ("e", ebay)
+             , ("e", S.alpha)
              , ("g", S.google)
-             , ("h", S.hoogle)
              , ("i", S.images)
              , ("n", news)
-             , ("r", reddit)
+             , ("p", packages)
+             , ("r", aur)
              , ("s", S.stackage)
              , ("t", S.thesaurus)
              , ("v", S.vocabulary)
-             , ("b", S.wayback)
              , ("u", urban)
              , ("w", S.wikipedia)
              , ("y", S.youtube)
@@ -707,18 +708,18 @@ myManageHook = composeAll
      -- using 'doShift ( myWorkspaces !! 7)' sends program to workspace 8!
      -- I'm doing it this way because otherwise I would have to write out the full
      -- name of my workspaces, and the names would very long if using clickable workspaces.
-     [ title =? "New Tab - Chromium"     --> doShift ( myWorkspaces !! 1 )
-     , title =? "Twitch - Chromium"     --> doShift ( myWorkspaces !! 2 )
-     , className =? "Microsoft Teams - Preview"     --> doShift ( myWorkspaces !! 7 )
+     [ className =? "Microsoft Teams - Preview"     --> doShift ( myWorkspaces !! 7 )
      , title =? "Microsoft Teams Notification" --> doFloat
      , className =? "zoom"     --> doShift ( myWorkspaces !! 7 )
      , className =? "Steam"     --> doShift ( myWorkspaces !! 4 )
+     , title =? "Steam - News"     --> doFloat
      , className =? "steam_app_945360"     --> doFloat
      , className =? "steam_app_945360"     --> doShift ( myWorkspaces !! 5 )
+     , className =? "steam_app_435150"     --> doShift ( myWorkspaces !! 5 )
      , className =? "Gimp"    --> doFloat
      , title =? "Oracle VM VirtualBox Manager"     --> doFloat
      , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 5 )
-     , (className =? "Chromium" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
 myLogHook :: X ()
