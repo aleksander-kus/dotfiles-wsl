@@ -147,19 +147,20 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
                    , gs_font         = myFont
                    }
 
--- myAppGrid = [ ("Audacity", "audacity")
---                  , ("Deadbeef", "deadbeef")
---                  , ("Emacs", "emacsclient -c -a emacs")
---                  , ("Firefox", "firefox")
---                  , ("Geany", "geany")
---                  , ("Geary", "geary")
---                  , ("Gimp", "gimp")
---                  , ("Kdenlive", "kdenlive")
---                  , ("LibreOffice Impress", "loimpress")
---                  , ("LibreOffice Writer", "lowriter")
---                  , ("OBS", "obs")
---                  , ("PCManFM", "pcmanfm")
---                  ]
+myAppGrid = [ ("Teams", "teams")
+                 , ("Gimp", "gimp")
+                 , ("Zoom", "zoom")
+                 , ("Firefox", "firefox")
+                 , ("xmonad.hs", "code ~/.xmonad/xmonad.hs")
+                 , ("Geary", "geary")
+                 , ("Gimp", "gimp")
+                 , ("Kdenlive", "kdenlive")
+                 , ("LibreOffice Impress", "loimpress")
+                 , ("LibreOffice Writer", "lowriter")
+                 , ("config.fish", "code ~/.config/fish/config.fish")
+                 , ("PCManFM", "pcmanfm")
+                 , ("xmobarrc", "code ~/.config/xmobar/xmobarrc")
+                 ]
 
 -- treeselectAction :: TS.TSConfig (X ()) -> X ()
 -- treeselectAction a = TS.treeselectAction a
@@ -768,9 +769,9 @@ myKeys =
         , ("M-S-i", incScreenSpacing 4)         -- Increase screen spacing
 
     -- Grid Select (CTR-g followed by a key)
-        --, ("C-g g", spawnSelected' myAppGrid)                 -- grid select favorite apps
-        --, ("C-g t", goToSelected $ mygridConfig myColorizer)  -- goto selected window
-        --, ("C-g b", bringSelected $ mygridConfig myColorizer) -- bring selected window
+        , ("M-g", spawnSelected' myAppGrid)                 -- grid select favorite apps
+        , ("C-g t", goToSelected $ mygridConfig myColorizer)  -- goto selected window
+        , ("C-g b", bringSelected $ mygridConfig myColorizer) -- bring selected window
 
     -- Tree Select
         --, ("C-t t", treeselectAction tsDefaultConfig)
