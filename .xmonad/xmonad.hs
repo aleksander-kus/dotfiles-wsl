@@ -695,7 +695,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
                                  ||| threeCol
                                  -- ||| threeRow
 
-myWorkspaces = [ " dev ", " www ", " twitch ", " sys ", " steam ", " game ", " mus ", " meet "]
+myWorkspaces = [ " dev ", " www ", " var ", " sys ", " steam ", " game ", " mus ", " meet "]
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 
 xmobarEscape :: String -> String
