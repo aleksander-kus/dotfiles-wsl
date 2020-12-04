@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SPACES=""
+SPACE="   "
+pgrep "steam" 1>/dev/null 2>&1 && SPACES=${SPACES}$SPACE" "
+pgrep "volumeicon" 1>/dev/null 2>&1 && SPACES=${SPACES}$SPACE
+pgrep "NetworkManager" 1>/dev/null 2>&1 && SPACES=${SPACES}$SPACE
+pgrep "zoom" 1>/dev/null 2>&1 && SPACES=${SPACES}$SPACE"      "
+pgrep "teams" 1>/dev/null 2>&1 && SPACES=${SPACES}$SPACE"    "
+echo "$SPACES KEKW"
