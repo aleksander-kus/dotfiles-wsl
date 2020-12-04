@@ -1,0 +1,1 @@
+config merge --no-ff -m "<cursor>" -
