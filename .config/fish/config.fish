@@ -354,8 +354,11 @@ alias lt 'exa -aT --color=always --group-directories-first' # tree listing
 
 # pacman and yay
 alias pacsyu 'sudo pacman -Syyu'                 # update only standard pkgs
-alias update_aur 'yay -Sua --noconfirm'              # update only AUR pkgs
-alias update 'yay -Syyu --noconfirm'              # update standard pkgs and AUR pkgs
+alias update-aur 'yay -Sua --noconfirm'          # update only AUR pkgs
+alias update 'yay -Syyu --noconfirm'             # update standard pkgs and AUR pkgs
+alias installed 'pacman -Qn'                     # list native packages
+alias installed-aur 'pacman -Qm'                 # list AUR packages
+alias exinstalled "expac -H M '%011m\t%-20n\t%10d' (comm -23 (pacman -Qqen | sort | psub) (pacman -Qqg base-devel xorg | sort | uniq | psub)) | sort -n"
 alias unlock 'sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
 alias cleanup 'sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
 
