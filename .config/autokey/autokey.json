@@ -13,7 +13,7 @@
         "undoUsingBackspace": true,
         "windowDefaultSize": [
             932,
-            1020
+            500
         ],
         "hPanePosition": 233,
         "columnWidths": [
@@ -32,7 +32,7 @@
     },
     "folders": [],
     "toggleServiceHotkey": {
-        "enabled": true,
+        "enabled": false,
         "modifiers": [
             "<shift>",
             "<super>"
@@ -40,7 +40,7 @@
         "hotKey": "k"
     },
     "configHotkey": {
-        "enabled": true,
+        "enabled": false,
         "modifiers": [
             "<super>"
         ],
