@@ -13,7 +13,7 @@
         "undoUsingBackspace": true,
         "windowDefaultSize": [
             932,
-            500
+            1020
         ],
         "hPanePosition": 233,
         "columnWidths": [
@@ -25,7 +25,9 @@
         "notificationIcon": "autokey-status",
         "workAroundApps": ".*VirtualBox.*|krdc.Krdc",
         "triggerItemByInitial": false,
-        "disabledModifiers": [],
+        "disabledModifiers": [
+            "<capslock>"
+        ],
         "scriptGlobals": {}
     },
     "folders": [],
