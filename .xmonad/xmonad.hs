@@ -150,7 +150,7 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
 myAppGrid = [ ("Teams", "teams")
                  , ("Gimp", "gimp")
                  , ("Zoom", "zoom")
-                 , ("Firefox", "firefox")
+                 , ("Steam", "steam")
                  , ("xmonad.hs", "code ~/.xmonad/xmonad.hs")
                  , ("Geary", "geary")
                  , ("Gimp", "gimp")
