@@ -29,17 +29,6 @@ bind -m vi-insert 'Control-l: clear-screen'
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-### PROMPT
-PS1="[\u@\h \w]$ "
-### PATH
-if [ -d "$HOME/.bin" ] ;
-  then PATH="$HOME/.bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ] ;
-  then PATH="$HOME/.local/bin:$PATH"
-fi
-
 ### CHANGE TITLE OF TERMINALS
 case ${TERM} in
   xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
@@ -207,3 +196,5 @@ alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/mas
 ### RANDOM COLOR SCRIPT ###
 /opt/shell-color-scripts/colorscript.sh random
 #source $HOME/.config/broot/launcher/bash/br
+
+eval "$(starship init bash)"

@@ -152,7 +152,7 @@ myAppGrid = [ ("Teams", "teams")
                  , ("Zoom", "zoom")
                  , ("Steam", "steam")
                  , ("xmonad.hs", "code ~/.xmonad/xmonad.hs")
-                 , ("Geary", "geary")
+                 , ("Volume control", "pavucontrol")
                  , ("Gimp", "gimp")
                  , ("Kdenlive", "kdenlive")
                  , ("LibreOffice Impress", "loimpress")
@@ -714,12 +714,13 @@ myManageHook = composeAll
      , className =? "zoom"     --> doShift ( myWorkspaces !! 7 )
      , className =? "Steam"     --> doShift ( myWorkspaces !! 4 )
      , title =? "Steam - News"     --> doFloat
-     , className =? "steam_app_945360"     --> doFloat
      , className =? "steam_app_945360"     --> doShift ( myWorkspaces !! 5 )
      , className =? "steam_app_435150"     --> doShift ( myWorkspaces !! 5 )
      , className =? "Gimp"    --> doFloat
      , title =? "Oracle VM VirtualBox Manager"     --> doFloat
      , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 5 )
+     , className =? "Code" --> doShift  ( myWorkspaces !! 0 )
+     , className =? "Pavucontrol" --> doShift  ( myWorkspaces !! 6 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
