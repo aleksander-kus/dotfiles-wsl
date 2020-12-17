@@ -171,6 +171,22 @@ function restore --argument file
     mv $file (echo $file | sed s/.bak//)
 end
 
+function row --argument index
+    sed -n "$index p"
+end
+
+function trim-right --argument char
+    sed "s|$char\$||"
+end
+
+function is-clean-zip --argument zipfile
+    set summary (zip -sf $zipfile | string split0)
+    set first_file (echo $summary | row 2 | string trim)
+    set first_file_last_char (echo $first_file | string sub --start=-1)
+    set n_files (echo $summary | awk NF | tail -1 | coln 2)
+    test $n_files = 1 && test $first_file_last_char = /
+end
+
 function clean-unzip --argument zipfile
     if not test (echo $zipfile | string sub --start=-4) = .zip
         echo (status function): argument must be a zipfile
