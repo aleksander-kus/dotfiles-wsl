@@ -11,6 +11,7 @@ import XMonad.Actions.GridSelect
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
+import XMonad.Actions.SpawnOn
 import qualified XMonad.Actions.TreeSelect as TS
 import XMonad.Actions.WindowGo (runOrRaise)
 import XMonad.Actions.WithAll (sinkAll, killAll)
@@ -72,7 +73,7 @@ import Control.Arrow (first)
    -- Utilities
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
-import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
+import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
 myFont :: String
@@ -110,12 +111,6 @@ altMask = mod1Mask         -- Setting this for use in xprompts
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
-
-myStartupHook :: X ()
-myStartupHook = do
-          spawnOnce "/home/alex/.xmonad/scripts/autostart.sh"
-          -- spawnOnce "/usr/bin/emacs --daemon &"
-          -- spawnOnce "kak -d -s mysession &"
 
 myColorizer :: Window -> Bool -> X (String, String)
 myColorizer = colorRangeFromClassName
@@ -698,6 +693,15 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange
 myWorkspaces = [ " dev ", " www ", " var ", " sys ", " steam ", " game ", " mus ", " meet "]
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 
+myStartupHook :: X ()
+myStartupHook = do
+          spawnOnce "/home/alex/.xmonad/scripts/autostart.sh"
+          spawnOn ( myWorkspaces !! 1 ) myBrowser
+          spawnOn ( myWorkspaces !! 3 ) myTerminal
+          spawnOn ( myWorkspaces !! 3 ) myFileManager
+          -- spawnOnce "/usr/bin/emacs --daemon &"
+          -- spawnOnce "kak -d -s mysession &"
+
 xmobarEscape :: String -> String
 xmobarEscape = concatMap doubleLts
   where
@@ -722,7 +726,7 @@ myManageHook = composeAll
      , className =? "Code" --> doShift  ( myWorkspaces !! 0 )
      , className =? "Pavucontrol" --> doShift  ( myWorkspaces !! 6 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-     ] <+> namedScratchpadManageHook myScratchPads
+     ] <+> namedScratchpadManageHook myScratchPads <+> manageSpawn
 
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
