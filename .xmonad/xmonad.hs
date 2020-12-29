@@ -745,6 +745,7 @@ myKeys =
     -- Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn (myTerminal ++ " -e fish"))
         , ("M-b", spawn (myBrowser))
+        , ("M-c", spawn "qalculate-gtk")
         , ("M-S-t", spawn (myBrowser ++ " --new-window twitch.tv"))
         , ("M-M1-h", spawn (myTerminal ++ " -e htop"))
         , ("M-e", spawn (myEditor))
