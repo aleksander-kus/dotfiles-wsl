@@ -19,7 +19,7 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=t
        , iconRoot = "/home/alex/.xmonad/xpm/"
        , commands = [ 
                       -- Time and date
-                      Run Date "<fn=3>\xf133</fn> %b %d %Y (%H:%M)" "date" 50
+                      Run Date "<fn=3>\xf133</fn> %d %b %Y (%H:%M)" "date" 50
                       -- Network up and down
                     , Run Network "eno1" ["-t", "<fn=4>\xf0ab</fn> <rx>kb  <fn=4>\xf0aa</fn> <tx>kb"] 20
                       -- Cpu usage in percent
@@ -27,7 +27,7 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=t
                       -- Ram used number and percent
                     , Run Memory ["-t", "<fn=4>\xf233</fn> mem: <used>M (<usedratio>%)"] 20
                       -- Disk space free
-                    , Run DiskU [("/", "<fn=3>\xf0c7</fn> hdd: <free> free")] [] 60
+                    , Run DiskU [("/", "<fn=3>\xf0c7</fn> /dev/nvmen0p5: <free> free")] [] 60
                       -- Runs custom script to check for pacman updates.
                       -- This script is in my dotfiles repo in .local/bin.
                     , Run Com "/home/alex/.local/bin/pacupdate" [] "pacupdate" 3600

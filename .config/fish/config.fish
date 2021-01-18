@@ -353,6 +353,7 @@ alias cch "config checkout"
 alias ccb "config checkout -b"
 alias cchm "config checkout master"
 alias cdi "config diff"
+alias cdc "config diff --cached"
 alias cf "config ls-tree -r master --name-only"
 alias cfnt "config fetch --no-tags"
 alias cfpp "config fetch --prune --prune-tags"
@@ -379,6 +380,7 @@ alias gch "git checkout"
 alias gcb "git checkout -b"
 alias gchm "git checkout master"
 alias gd "git diff"
+alias gdc "git diff --cached"
 alias gf "git fetch"
 alias gfnt "git fetch --no-tags"
 alias gfpp "git fetch --prune --prune-tags"
@@ -401,5 +403,7 @@ bind -M insert \cf forward-bigword
 # Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
 # Or install it from the Arch User Repository: shell-color-scripts
 /opt/shell-color-scripts/colorscript.sh random
+
+set -gx PATH /home/alex/pycharm/bin $PATH
 
 starship init fish | source

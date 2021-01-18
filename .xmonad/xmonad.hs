@@ -143,7 +143,7 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
                    }
 
 myAppGrid = [ ("Teams", "teams")
-                 , ("Gimp", "gimp")
+                 , ("PyCharm", "pycharm")
                  , ("Zoom", "zoom")
                  , ("Steam", "steam")
                  , ("xmonad.hs", "code ~/.xmonad/xmonad.hs")
@@ -700,7 +700,6 @@ myStartupHook = do
           spawnOn ( myWorkspaces !! 3 ) myTerminal
           spawnOn ( myWorkspaces !! 3 ) myFileManager
           -- spawnOnce "/usr/bin/emacs --daemon &"
-          -- spawnOnce "kak -d -s mysession &"
 
 xmobarEscape :: String -> String
 xmobarEscape = concatMap doubleLts
