@@ -22,6 +22,7 @@ import Data.Char (isSpace, toUpper)
 import Data.Monoid
 import Data.Maybe (isJust)
 import Data.Tree
+import Data.Word
 import qualified Data.Map as M
 
     -- Hooks
@@ -75,6 +76,8 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+import Graphics.X11.Xlib
+import Graphics.X11.Xlib.Extras
 
 myFont :: String
 myFont = "xft:MesloLGS NF:bold:size=9:antialias=true:hinting=true"
@@ -89,7 +92,7 @@ myFileManager :: String
 myFileManager = "pcmanfm"   -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "firefox "               -- Sets qutebrowser as browser for tree select
+myBrowser = "brave "               -- Sets qutebrowser as browser for tree select
 -- myBrowser = myTerminal ++ " -e lynx " -- Sets lynx as browser for tree select
 
 myEditor :: String
@@ -721,8 +724,8 @@ myManageHook = composeAll
      , className =? "steam_app_435150"     --> doShift ( myWorkspaces !! 5 )
      , className =? "Gimp"    --> doFloat
      , title =? "Oracle VM VirtualBox Manager"     --> doFloat
-     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 5 )
-     , className =? "Code" --> doShift  ( myWorkspaces !! 0 )
+     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 0 )
+     , className =? "jetbrains-pycharm" --> doShift  ( myWorkspaces !! 0 )
      , className =? "Pavucontrol" --> doShift  ( myWorkspaces !! 6 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads <+> manageSpawn
@@ -730,6 +733,16 @@ myManageHook = composeAll
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 1
+
+
+setTransparentHook :: Event -> X All
+setTransparentHook ConfigureEvent{ev_event_type = createNotify, ev_window = id} = do
+  setOpacity id opacity
+  return (All True) where
+    opacityFloat = 0.9
+    opacity = floor $ fromIntegral (maxBound :: Word32) * opacityFloat
+    setOpacity id op = spawn $ "xprop -id " ++ show id ++ " -f _NET_WM_WINDOW_OPACITY 32c -set _NET_WM_WINDOW_OPACITY " ++ show op
+setTransparentHook _ = return (All True)
 
 myKeys :: [(String, X ())]
 myKeys =
@@ -863,7 +876,7 @@ myKeys =
         ]
     -- Appending search engine prompts to keybindings list.
     -- Look at "search engines" section of this config for values for "k".
-        ++ [("M-s " ++ k, S.promptSearch dtXPConfig' f) | (k,f) <- searchList ]
+        ++ [("M-s " ++ k, S.promptSearchBrowser dtXPConfig' "brave" f) | (k,f) <- searchList ]
         ++ [("M-S-s " ++ k, S.selectSearch f) | (k,f) <- searchList ]
     -- Appending some extra xprompts to keybindings list.
     -- Look at "xprompt settings" section this of config for values for "k".
@@ -889,6 +902,7 @@ main = do
                                <+> serverModeEventHook
                                <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
                                <+> docksEventHook
+                               <+> setTransparentHook
         , modMask            = myModMask
         , terminal           = myTerminal
         , startupHook        = myStartupHook

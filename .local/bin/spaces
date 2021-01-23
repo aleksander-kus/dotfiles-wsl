@@ -1,9 +1,0 @@
-#!/bin/bash
-
-SPACES="               "
-pgrep "steam" 1>/dev/null 2>&1 && SPACES=${SPACES}"       "
-pgrep "autokey" 1>/dev/null 2>&1 && SPACES=${SPACES}"     "
-pgrep "zoom" 1>/dev/null 2>&1 && SPACES=${SPACES}"       "
-pgrep "teams" 1>/dev/null 2>&1 && SPACES=${SPACES}"      "
-pgrep "vlc" 1>/dev/null 2>&1 && SPACES=${SPACES}"       "
-echo "$SPACES"
