@@ -194,7 +194,7 @@ alias tb="nc termbin.com 9999"
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 # backup with tar
-alias backup='sudo rsync -aAXHv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/alex/Disk1/*","/home/alex/Disk2/*"} / /home/alex/Disk2/backup'
+alias backup='sudo rsync -aAXHh --info=progress2 --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/alex/Disk1/*","/home/alex/Disk2/*"} / /home/alex/Disk2/backup'
 
 ### RANDOM COLOR SCRIPT ###
 /opt/shell-color-scripts/colorscript.sh random
