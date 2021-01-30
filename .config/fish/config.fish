@@ -402,14 +402,11 @@ alias gs "git status"
 alias gt "git tag"
 alias gta "git tag -a"
 
-# accept autocompletion
+# accept autocompletion with Ctrl+F
 bind -M insert \cf forward-bigword
 
 ### RANDOM COLOR SCRIPT ###
-# Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
-# Or install it from the Arch User Repository: shell-color-scripts
+# Arch User Repository: shell-color-scripts
 /opt/shell-color-scripts/colorscript.sh random
-
-set -gx PATH /home/alex/pycharm/bin $PATH
 
 starship init fish | source
