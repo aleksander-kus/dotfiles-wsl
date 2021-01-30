@@ -306,6 +306,7 @@ abbr -a bk backup
 abbr -a re restore
 abbr -a mc mkdir-cd
 abbr -a unzip clean-unzip
+abbr -a clu clean-unzip
 
 # recompile and restart xmonad in terminal
 alias restart "xmonad --recompile && xmonad --restart"
@@ -341,6 +342,9 @@ alias tobash "sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 
 # the terminal rickroll
 alias rr 'curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+
+# Path of Building
+alias pob 'wine /home/alex/bin/PathOfBuildingCommunity-Setup-1.4.170.24/Path\ of\ Building.exe'
 
 # bare git repo alias for dotfiles
 alias config "/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
