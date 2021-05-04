@@ -402,6 +402,9 @@ alias gs "git status"
 alias gt "git tag"
 alias gta "git tag -a"
 
+# for wsl
+alias ex "explorer.exe ."
+
 # accept autocompletion with Ctrl+F
 bind -M insert \cf forward-bigword
 
