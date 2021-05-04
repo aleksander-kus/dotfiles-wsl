@@ -390,8 +390,8 @@ alias gdc "git diff --cached"
 alias gf "git fetch"
 alias gfnt "git fetch --no-tags"
 alias gfpp "git fetch --prune --prune-tags"
-alias gi "gitk"
-alias gia "gitk --all"
+alias gi "gitk.exe"
+alias gia "gitk.exe --all"
 alias gl "git log"
 alias glo "git log --oneline"
 alias glog "git log --oneline --graph"
@@ -407,6 +407,6 @@ bind -M insert \cf forward-bigword
 
 ### RANDOM COLOR SCRIPT ###
 # Arch User Repository: shell-color-scripts
-/opt/shell-color-scripts/colorscript.sh random
+# /opt/shell-color-scripts/colorscript.sh random
 
 starship init fish | source
