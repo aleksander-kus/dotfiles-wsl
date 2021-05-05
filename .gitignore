@@ -1,0 +1,12 @@
+.bash_history
+.cache/
+.config/fish/fish_variables
+.landscape/
+.local/share/
+.motd_shown
+.sudo_as_admin_successful
+.viminfo
+.vscode-server/
+.wget-hsts
+alexq
+studia
