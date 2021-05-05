@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+
+import json
+from datetime import datetime, timedelta
+import sys
+
+if(len(sys.argv) != 3):
+    print("USAGE: decode_fb input.json output")
+    exit(1)
+previous_time = ""
+with open(sys.argv[1]) as file, open(sys.argv[2], 'a') as output:
+    messages = json.load(file)["messages"]
+    for message in messages:
+        if('content' in message):
+            time = datetime.utcfromtimestamp(int(message['timestamp_ms'])/1000.0)
+            if(previous_time != "" and previous_time - time >= timedelta(hours=3)):
+                output.write("-----------------------\n")
+            previous_time = time
+            output.write(time.strftime('%Y-%m-%d %H:%M:%S') + " " + message['sender_name'].encode('latin1').decode('utf8') + ": " + message['content'].encode('latin1').decode('utf8') + "\n")
