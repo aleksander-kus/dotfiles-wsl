@@ -1,0 +1,7 @@
+[user]
+	name = Aleksander Kuś
+	email = 01151536@pw.edu.pl
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
+[core]
+	autocrlf = false
