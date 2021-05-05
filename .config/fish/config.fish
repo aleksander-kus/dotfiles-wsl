@@ -1,4 +1,5 @@
 set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
+set -U fish_user_paths $fish_user_paths $HOME/bin/
 set fish_greeting                      # Supresses fish's intro message
 set TERM "xterm-256color"              # Sets the terminal type
 #set EDITOR "emacsclient -t -a ''"      # $EDITOR use Emacs in terminal
@@ -404,6 +405,8 @@ alias gta "git tag -a"
 
 # for wsl
 alias ex "explorer.exe ."
+alias stud "cd /mnt/c/Users/alexq/studia"
+alias aq "cd /mnt/c/Users/alexq"
 
 # accept autocompletion with Ctrl+F
 bind -M insert \cf forward-bigword
