@@ -1,7 +1,11 @@
 [user]
 	name = Aleksander Kuś
-	email = 01151536@pw.edu.pl
+	email = alex.qs234@gmail.com
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
 [core]
 	autocrlf = false
+[includeif "gitdir:~/studia/"]
+	path = .gitconfig.work
+[includeif "gitdir:/mnt/c/Users/alexq/studia/"]
+	path = .gitconfig.work
