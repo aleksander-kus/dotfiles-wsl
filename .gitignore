@@ -4,6 +4,7 @@
 .landscape/
 .local/share/
 .motd_shown
+.npm
 .sudo_as_admin_successful
 .viminfo
 .vscode-server/
@@ -11,3 +12,4 @@
 alexq
 studia
 bin/sendstage
+test

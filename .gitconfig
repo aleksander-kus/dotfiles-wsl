@@ -4,7 +4,8 @@
 [credential]
 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
 [core]
-	autocrlf = false
+	autocrlf = true
+	editor = code -w
 [includeif "gitdir:~/studia/"]
 	path = .gitconfig.work
 [includeif "gitdir:/mnt/c/Users/alexq/studia/"]
