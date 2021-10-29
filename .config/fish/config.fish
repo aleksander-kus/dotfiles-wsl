@@ -1,4 +1,4 @@
-set -U fish_user_paths $fish_user_paths $HOME/.local/bin/
+spwset -U fish_user_paths $fish_user_paths $HOME/.local/bin/
 set -U fish_user_paths $fish_user_paths $HOME/bin/
 set fish_greeting                      # Supresses fish's intro message
 set TERM "xterm-256color"              # Sets the terminal type
@@ -160,7 +160,7 @@ function take --argument number
     head -$number
 end
 
-function mkdir-cd
+function mkcd
     mkdir $argv && cd $argv
 end
 
