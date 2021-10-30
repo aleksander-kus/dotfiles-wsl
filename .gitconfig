@@ -2,7 +2,9 @@
 	name = Aleksander Kuś
 	email = alex.qs234@gmail.com
 [credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe
+	useHttpPath = true
+	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-manager-core.exe
+	credentialStore = gpg
 [core]
 	autocrlf = true
 	editor = code -w
