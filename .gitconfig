@@ -9,6 +9,10 @@
 	autocrlf = true
 	editor = code -w
 [includeif "gitdir:~/studia/"]
-	path = .gitconfig.work
+	path = ~/.gitconfig.work
 [includeif "gitdir:/mnt/c/Users/alexq/studia/"]
-	path = .gitconfig.work
+	path = ~/.gitconfig.work
+[includeif "gitdir:/mnt/c/Users/alex/studia/"]
+	path = ~/.gitconfig.work
+[credential "https://dev.azure.com"]
+	useHttpPath = true
